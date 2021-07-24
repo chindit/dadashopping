@@ -6,8 +6,9 @@
     :key="item.id"
     :selected="selectedItem === item.id"
     @dblclick="select(item.id)"
-    @click.prevent="switchState(item.id)"
+    @switched="switchState(item.id)"
     @updated="update($event, item.id)"
+    @deleted="remove(item.id)"
   />
   <button id="add-button" class="is-clickable button is-rounded" @click="add">
     <font-awesome-icon icon="plus" />
@@ -15,6 +16,7 @@
 </template>
 
 <script>
+import { computed } from 'vue'
 import { useStore } from 'vuex'
 import ListItem from '@/components/ListItem'
 import { v4 as uuid } from 'uuid'
@@ -29,10 +31,9 @@ export default {
   },
   setup () {
     const store = useStore()
-    const activeList = store.state.list
 
     return {
-      activeList,
+      activeList: computed(() => store.state.list),
       store
     }
   },
@@ -54,7 +55,13 @@ export default {
       this.selectedItem = id
     },
     switchState (id) {
+      console.log('called switch')
       this.store.commit('switchState', { id: id })
+    },
+    remove (id) {
+      console.log('called remove')
+      this.selectedItem = null
+      this.store.commit('remove', { id: id })
     }
   }
 }

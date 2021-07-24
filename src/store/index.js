@@ -21,6 +21,9 @@ export default createStore({
     switchState (state, payload) {
       const entry = state.list.find(item => item.id === payload.id)
       entry.done = !entry.done
+    },
+    remove (state, payload) {
+      state.list = state.list.filter(item => item.id !== payload.id)
     }
   },
   actions: {
