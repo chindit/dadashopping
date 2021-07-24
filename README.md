@@ -1,5 +1,8 @@
 # dada-shopping
 
+## Live Demo
+A live demo can be [found here](https://chindit.github.io/dadashopping)
+
 ## Project setup
 ```
 npm install
