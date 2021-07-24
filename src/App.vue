@@ -1,30 +1,30 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
+  <nav class="navbar has-background-grey-light" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item m-auto is-size-1" href="https://bulma.io">
+        DadaShopping
+      </a>
+    </div>
+  </nav>
   <router-view/>
+  <nav class="navbar is-fixed-bottom is-flex is-size-1">
+      <router-link class="navbar-item is-flex-grow-1" to="https://bulma.io/">
+        <font-awesome-icon icon="home" />
+      </router-link>
+      <router-link class="navbar-item is-flex-grow-1" to="https://bulma.io/">
+        <font-awesome-icon icon="carrot" />
+      </router-link>
+      <router-link class="navbar-item is-flex-grow-1" to="https://bulma.io/">
+        <font-awesome-icon icon="user" />
+      </router-link>
+      <router-link class="navbar-item is-flex-grow-1" to="https://bulma.io/">
+        <font-awesome-icon icon="cogs" />
+      </router-link>
+  </nav>
 </template>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
+@import '~bulma';
 </style>
+<script>
+</script>
