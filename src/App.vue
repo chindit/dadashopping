@@ -25,6 +25,7 @@
 
 <style lang="scss">
 @import '~bulma';
+@import "~bulma-switch";
 </style>
 <script>
 </script>

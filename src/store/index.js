@@ -8,7 +8,12 @@ const vuexLocal = new VuexPersistence({
 export default createStore({
   state: {
     list: [
-    ]
+    ],
+    settings: {
+      deleteEmpty: false,
+      hideDelete: false,
+      hideCompleted: false
+    }
   },
   mutations: {
     updateText (state, payload) {
@@ -24,6 +29,9 @@ export default createStore({
     },
     remove (state, payload) {
       state.list = state.list.filter(item => item.id !== payload.id)
+    },
+    updateSettings (state, payload) {
+      state.settings = payload
     }
   },
   actions: {

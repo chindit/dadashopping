@@ -8,7 +8,11 @@
           {{ entry.name }}
         </span>
         </label>
-        <span class="is-pulled-right mr-5 is-size-3 has-text-danger is-clickable" @click="$emit('deleted')">
+        <span
+          class="is-pulled-right mr-5 is-size-3 has-text-danger is-clickable"
+          @click="$emit('deleted')"
+          v-if="!hideDeleted"
+        >
           <font-awesome-icon icon="trash"/>
         </span>
       </div>
@@ -35,6 +39,10 @@ export default {
       required: true
     },
     selected: {
+      type: Boolean,
+      required: false
+    },
+    hideDeleted: {
       type: Boolean,
       required: false
     }

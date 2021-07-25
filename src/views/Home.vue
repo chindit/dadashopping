@@ -5,6 +5,7 @@
     :item="item"
     :key="item.id"
     :selected="selectedItem === item.id"
+    :hideDeleted="settings.hideDelete"
     @dblclick="select(item.id)"
     @switched="switchState(item.id)"
     @updated="update($event, item.id)"
@@ -32,8 +33,13 @@ export default {
   setup () {
     const store = useStore()
 
+    const settings = computed(() => store.state.settings)
+
     return {
-      activeList: computed(() => store.state.list),
+      activeList: computed(() => {
+        return store.state.list.filter(item => !settings.value.hideCompleted || !item.done)
+      }),
+      settings,
       store
     }
   },
@@ -43,7 +49,14 @@ export default {
     },
     update (text, id) {
       this.selectedItem = null
-      this.store.commit('updateText', { id: id, text: text })
+      if (this.settings.deleteEmpty && text.trim().length === 0) {
+        this.remove(id)
+      } else {
+        this.store.commit('updateText', {
+          id: id,
+          text: text.trim()
+        })
+      }
     },
     add () {
       const id = uuid()
@@ -55,11 +68,9 @@ export default {
       this.selectedItem = id
     },
     switchState (id) {
-      console.log('called switch')
       this.store.commit('switchState', { id: id })
     },
     remove (id) {
-      console.log('called remove')
       this.selectedItem = null
       this.store.commit('remove', { id: id })
     }
